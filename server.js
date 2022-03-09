@@ -100,7 +100,7 @@ app.post("/fruits", (req, res) => {
     });
 });
 
-//update route
+//update route - this comes from the form
 app.put("/fruits/:id", (req, res) => {
     // get the id from params
     const id = req.params.id;
@@ -110,6 +110,9 @@ app.put("/fruits/:id", (req, res) => {
     Fruit.findByIdAndUpdate(id, req.body, { new: true })
       .then((fruit) => {
         // redirect to main page after updating
+
+        // can also go back to show page ?
+        // res.redirect(`/fruits/$fruit.id`);
         res.redirect("/fruits");
       })
       // send error as json
@@ -118,7 +121,7 @@ app.put("/fruits/:id", (req, res) => {
         res.json({ error });
       });
   });
-  
+
 // edit route
 app.get("/fruits/:id/edit", (req, res) => {
     // get the id from params
