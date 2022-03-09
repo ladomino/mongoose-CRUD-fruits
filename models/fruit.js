@@ -19,6 +19,8 @@ const fruitSchema = new Schema({
   }, {timestamps: true});
   
   // make fruit model
+  // Mongoose takes the model name and pluralizes it 
+  //   for the collection name
   const Fruit = model("Fruit", fruitSchema);
 
 /////////////////////////////////////////////
