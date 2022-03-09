@@ -7,7 +7,7 @@ const morgan = require("morgan"); //import morgan
 const methodOverride = require("method-override");
 const mongoose = require("mongoose");
 const path = require("path")
-const Fruit = require("./models/fruits.js");
+const Fruit = require("./models/fruit.js");
 
 
 
@@ -71,7 +71,7 @@ app.get("/fruits", (req, res) => {
       });
   });
 
-  
+
 //////////////////////////////////////////////
 // Server Listener
 //////////////////////////////////////////////
