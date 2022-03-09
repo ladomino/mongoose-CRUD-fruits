@@ -12,14 +12,14 @@ const mongoose = require('./connection');
 const {Schema, model} = mongoose
 
 // make fruits schema
-const fruitsSchema = new Schema({
+const fruitSchema = new Schema({
     name: {type: String},
     color: {type: String},
     readyToEat: {type: Boolean},
   }, {timestamps: true});
   
   // make fruit model
-  const Fruit = model("Fruit", fruitsSchema);
+  const Fruit = model("Fruit", fruitSchema);
 
 /////////////////////////////////////////////
 // Export Fruits Model

@@ -5,8 +5,8 @@ require("dotenv").config(); // Load ENV Variables
 const express = require("express"); // import express
 const morgan = require("morgan"); //import morgan
 const methodOverride = require("method-override");
-const mongoose = require("mongoose");
-const path = require("path")
+// const mongoose = require("mongoose");
+// const path = require("path")
 const Fruit = require("./models/fruit.js");
 
 
@@ -48,10 +48,11 @@ app.get("/fruits/seed", (req, res) => {
     // Fruit.deleteMany({}).then((data) => {
     Fruit.remove({}).then((data) => {
       // Seed Starter Fruits
-      Fruit.create(startFruits).then((data) => {
+      Fruit.create(startFruits)
+        .then((data) => {
         // send created fruits as response to confirm creation
-        // res.send(data)
-        res.json(data);
+        res.send(data)
+        // res.json(data);
       });
     });
   });
