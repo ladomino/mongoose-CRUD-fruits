@@ -31,6 +31,47 @@ app.get("/", (req, res) => {
     res.send("your server is running... better catch it.");
 });
 
+
+app.get("/fruits/seed", (req, res) => {
+    // array of starter fruits
+    const startFruits = [
+      { name: "Orange", color: "orange", readyToEat: false },
+      { name: "Grape", color: "purple", readyToEat: false },
+      { name: "Banana", color: "orange", readyToEat: false },
+      { name: "Strawberry", color: "red", readyToEat: false },
+      { name: "Coconut", color: "brown", readyToEat: false },
+    ];
+  
+    //*** When we seed data we need to remove any data previously 
+    //
+    // Delete all fruits
+    // Fruit.deleteMany({}).then((data) => {
+    Fruit.remove({}).then((data) => {
+      // Seed Starter Fruits
+      Fruit.create(startFruits).then((data) => {
+        // send created fruits as response to confirm creation
+        // res.send(data)
+        res.json(data);
+      });
+    });
+  });
+
+
+// index route
+app.get("/fruits", (req, res) => {
+    // find all the fruits
+    Fruit.find({})
+      // render a template after they are found
+      .then((fruits) => {
+        res.render("fruits/index.liquid", { fruits });
+      })
+      // send error as json if they aren't
+      .catch((error) => {
+        res.json({ error });
+      });
+  });
+
+  
 //////////////////////////////////////////////
 // Server Listener
 //////////////////////////////////////////////
