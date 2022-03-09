@@ -8,6 +8,7 @@ const methodOverride = require("method-override");
 // const mongoose = require("mongoose");
 // const path = require("path")
 const Fruit = require("./models/fruit.js");
+const res = require("express/lib/response");
 
 
 
@@ -72,6 +73,24 @@ app.get("/fruits", (req, res) => {
       });
   });
 
+  // show route
+  app.get("/fruits/:id", (req, res) => {
+      // get the id from params
+    const fruitId = req.params.id;
+
+      // find the particular fruit from the database
+    Fruit.findById(fruitId)
+        .then((fruit) => {
+        // render the template with the data from the database
+        res.render("fruits/show.liquid", { fruit });
+        // res.send a good way to verify the data you have
+        //res.send(fruit);
+        })
+        .catch((error) => {
+        console.log(error);
+        res.json({ error });
+        });
+  })
 
 //////////////////////////////////////////////
 // Server Listener

@@ -6,7 +6,8 @@ our bloocks(files) -->
     <div>
     {% for fruit in fruits %}
         <article>
-            <a href="">
+            <!-- this is the database id called _id -->
+            <a href="/fruits/{{ fruit.id }}">
                 <h2> 
                     {{ fruit.name }}
                     {% if fruit.readyToEat %}
