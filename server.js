@@ -73,17 +73,39 @@ app.get("/fruits", (req, res) => {
       });
   });
 
-  // new route
-  app.get("/fruits/new", (req, res) => {
+// new route
+app.get("/fruits/new", (req, res) => {
     res.render("fruits/new.liquid");
-  });
-  
-  // show route
-  app.get("/fruits/:id", (req, res) => {
-      // get the id from params
-    const fruitId = req.params.id;
+});
 
-      // find the particular fruit from the database
+  // create route
+app.post("/fruits", (req, res) => {
+    // This needs to do some setup for the checkbox before we can
+    //  create.
+    // check if the readyToEat property should be true or false
+    req.body.readyToEat = req.body.readyToEat === "on" ? true : false;
+    // create the new fruit
+    Fruit.create(req.body)
+      .then((fruits) => {
+        // this shows the one object created and times
+        //console.log(fruits)
+
+        // redirect user to index page if successfully created item
+        res.redirect("/fruits");
+    })
+    // send error as json
+    .catch((error) => {
+        console.log(error);
+        res.json({ error });
+    });
+});
+
+// show route
+app.get("/fruits/:id", (req, res) => {
+    // get the id from params
+const fruitId = req.params.id;
+
+    // find the particular fruit from the database
     Fruit.findById(fruitId)
         .then((fruit) => {
         // render the template with the data from the database
@@ -94,8 +116,10 @@ app.get("/fruits", (req, res) => {
         .catch((error) => {
         console.log(error);
         res.json({ error });
-        });
-  })
+    });
+})
+
+
 
 //////////////////////////////////////////////
 // Server Listener
