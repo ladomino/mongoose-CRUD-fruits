@@ -1,0 +1,29 @@
+{
+  "name": "mongoose-crud-fruits",
+  "version": "1.0.0",
+  "description": "class lab",
+  "main": "server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "nodemon server.js",
+    "dev": "node server.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ladomino/mongoose-CRUD-fruits.git"
+  },
+  "author": "laurie",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/ladomino/mongoose-CRUD-fruits/issues"
+  },
+  "homepage": "https://github.com/ladomino/mongoose-CRUD-fruits#readme",
+  "dependencies": {
+    "dotenv": "^16.0.0",
+    "express": "^4.17.3",
+    "liquid-express-views": "^1.0.8",
+    "method-override": "^3.0.0",
+    "mongoose": "^6.2.4",
+    "morgan": "^1.10.0"
+  }
+}
