@@ -13,30 +13,30 @@ const router = express.Router();
 // Routes
 /////////////////////////////////////////
 
-router.get("/seed", (req, res) => {
-    // array of starter fruits
-    const startFruits = [
-      { name: "Orange", color: "orange", readyToEat: false },
-      { name: "Grape", color: "purple", readyToEat: false },
-      { name: "Banana", color: "orange", readyToEat: false },
-      { name: "Strawberry", color: "red", readyToEat: false },
-      { name: "Coconut", color: "brown", readyToEat: false },
-    ];
+// router.get("/seed", (req, res) => {
+//     // array of starter fruits
+//     const startFruits = [
+//       { name: "Orange", color: "orange", readyToEat: false },
+//       { name: "Grape", color: "purple", readyToEat: false },
+//       { name: "Banana", color: "orange", readyToEat: false },
+//       { name: "Strawberry", color: "red", readyToEat: false },
+//       { name: "Coconut", color: "brown", readyToEat: false },
+//     ];
   
-    //*** When we seed data we need to remove any data previously 
-    //
-    // Delete all fruits
-    // Fruit.deleteMany({}).then((data) => {
-    Fruit.remove({}).then((data) => {
-      // Seed Starter Fruits
-      Fruit.create(startFruits)
-        .then((data) => {
-        // send created fruits as response to confirm creation
-        res.send(data)
-        // res.json(data);
-      });
-    });
-  });
+//     //*** When we seed data we need to remove any data previously 
+//     //
+//     // Delete all fruits
+//     // Fruit.deleteMany({}).then((data) => {
+//     Fruit.remove({}).then((data) => {
+//       // Seed Starter Fruits
+//       Fruit.create(startFruits)
+//         .then((data) => {
+//         // send created fruits as response to confirm creation
+//         res.send(data)
+//         // res.json(data);
+//       });
+//     });
+//   });
 
 
 // index route
