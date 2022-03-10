@@ -59,7 +59,10 @@ router.get("/", (req, res) => {
     Fruit.find({})
       // render a template after they are found
       .then((fruits) => {
-        res.render("fruits/index.liquid", { fruits });
+          const username = req.session.username;
+          const loggedIn = req.session.loggedIn;
+
+        res.render("fruits/index.liquid", { fruits, username, loggedIn });
       })
       // send error as json if they aren't
       .catch((error) => {
@@ -74,7 +77,10 @@ router.get("/mine", (req, res) => {
     Fruit.find({ username: req.session.username })
       // render a template after they are found
       .then((fruits) => {
-        res.render("fruits/index.liquid", { fruits });
+        const username = req.session.username;
+        const loggedIn = req.session.loggedIn;
+
+        res.render("fruits/index.liquid", { fruits, username, loggedIn });
       })
       // send error as json if they aren't
       .catch((error) => {
@@ -84,7 +90,10 @@ router.get("/mine", (req, res) => {
 
 // new route
 router.get("/new", (req, res) => {
-    res.render("fruits/new.liquid");
+    const username = req.session.username;
+    const loggedIn = req.session.loggedIn;
+
+    res.render("fruits/new.liquid", {username, loggedIn});
 });
 
   // create route
@@ -141,8 +150,10 @@ router.get("/:id/edit", (req, res) => {
     // get the fruit from the database
     Fruit.findById(id)
       .then((fruit) => {
+        const username = req.session.username;
+        const loggedIn = req.session.loggedIn;
         // render edit page and send fruit data
-        res.render("fruits/edit.liquid", { fruit });
+        res.render("fruits/edit.liquid", { fruit, username, loggedIn });
       })
       // send error as json
       .catch((error) => {
@@ -159,8 +170,12 @@ const fruitId = req.params.id;
     // find the particular fruit from the database
     Fruit.findById(fruitId)
         .then((fruit) => {
+
+        const username = req.session.username;
+        const loggedIn = req.session.loggedIn;
+
         // render the template with the data from the database
-        res.render("fruits/show.liquid", { fruit });
+        res.render("fruits/show.liquid", { fruit, username, loggedIn });
         // res.send a good way to verify the data you have
         //res.send(fruit);
         })

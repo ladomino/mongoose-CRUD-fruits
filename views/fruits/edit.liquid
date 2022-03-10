@@ -2,7 +2,7 @@
 <div class="container-sm">
   <form action="/fruits/{{fruit._id}}?_method=PUT" method="post">
     <fieldset>
-      <legend>Edit {{fruit.name}}</legend>
+      <legend>Edit New Fruit</legend>
       <label class="form-label">
         NAME:</label>
         <input
@@ -25,8 +25,8 @@
       <label class="form-label">
         READY TO EAT:
         </label>
-        <input type="checkbox" class="form-check-input" name="readyToEat" {% if
-        fruit.readyToEat == true %} checked {% endif %} />
+        <input type="checkbox" class="form-check-input" name="readyToEat" 
+        {% if fruit.readyToEat == true %} checked {% endif %} />
     </fieldset>
     <input type="submit" value="Edit {{fruit.name}}" />
   </form>
