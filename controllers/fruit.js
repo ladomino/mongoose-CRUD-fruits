@@ -10,6 +10,20 @@ const Fruit = require("../models/fruit");
 const router = express.Router();
 
 /////////////////////////////////////////
+/// Router Middleware
+/////////////////////////////////////////
+// Authorization Middleware
+router.use((req,res,next) => {
+    // checking the loggedin boolean of our session
+    if (req.session.loggedIn) {
+        next();
+    } else {
+        // if they are not logged in send them to the login page
+        res.redirect('/user/login');
+    }
+})
+
+/////////////////////////////////////////
 // Routes
 /////////////////////////////////////////
 
@@ -53,6 +67,21 @@ router.get("/", (req, res) => {
       });
   });
 
+// index that shows only the users fruits
+//  initially we put it as fruits/mine
+router.get("/mine", (req, res) => {
+    // find all the fruits for that user
+    Fruit.find({ username: req.session.username })
+      // render a template after they are found
+      .then((fruits) => {
+        res.render("fruits/index.liquid", { fruits });
+      })
+      // send error as json if they aren't
+      .catch((error) => {
+        res.json({ error });
+      });
+});
+
 // new route
 router.get("/new", (req, res) => {
     res.render("fruits/new.liquid");
@@ -64,6 +93,9 @@ router.post("/", (req, res) => {
     //  create.
     // check if the readyToEat property should be true or false
     req.body.readyToEat = req.body.readyToEat === "on" ? true : false;
+
+    req.body.username = req.session.username;
+
     // create the new fruit
     Fruit.create(req.body)
       .then((fruits) => {
