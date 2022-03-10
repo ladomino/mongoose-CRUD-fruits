@@ -11,6 +11,7 @@ const express = require("express"); // import express
 const FruitRouter = require('./controllers/fruit.js');
 const UserRouter = require('./controllers/user.js');
 const middleware = require('./utils/middleware.js');
+const HomeRouter = require('./controllers/home.js')
 
 // session middleware requirements
 // const session = require("express-session");
@@ -57,6 +58,7 @@ middleware(app);
 // send all /fruits routes to FruitRouter
 app.use('/fruits', FruitRouter);
 app.use('/user', UserRouter);
+app.use('/', HomeRouter);
 
 
 app.get("/", (req, res) => {
